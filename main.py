@@ -1,4 +1,5 @@
 from processamentos import ajuste_termico, classificacao_estabilidade
+import colorama
 
 qtde_leituras = 0
 soma_pressao_ajustada = 0
@@ -7,6 +8,7 @@ qtde_leituras_zverde = 0
 qtde_consec_zverm = 0
 pressao_digitada = False
 
+print("\n")
 print("========== REFINARIA DELTA 9 ==========")
 print("*** Bem vindo ao SEUC-4 ***")
 
@@ -57,13 +59,13 @@ perc_zverde = (qtde_leituras_zverde / qtde_leituras) * 100
 
 print("\n")
 print("\n========== INDICADORES DE REGISTRO ==========")
-print("\nMédia de pressão ajustada: ", media)
-print("Menor pressão registrada: ", menor_pressao)
-print("Percentual de leituras na Zona verde: ", perc_zverde)
+print(f"\nMédia de pressão ajustada: {media:.0f} UPCs ")
+print(f"Menor pressão registrada: {menor_pressao} UPCs ")
+print(f"Percentual de leituras na Zona verde: {perc_zverde:.0f}%")
 print("\n")
 
 
 # ajustar protecao na validacao da pressao (sim ou nao)
 # ajustar formatacoes de saída (centralizacao, cores, símbolos (%) por exemplo)
-# podemos usar bibliotecas de cor para destacar atencao para o usuaário???
+# podemos usar bibliotecas de cor para destacar atencao para o usuário???
 # registra qtde de leituras por turno e qtde de travamentos ocorridos -monitorar
