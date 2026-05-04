@@ -1,46 +1,69 @@
 from processamentos import ajuste_termico, classificacao_estabilidade
 
 qtde_leituras = 0
-soma_leituras = 0
+soma_pressao_ajustada = 0
 menor_pressao = 9999
-qtde_leituras_zv = 0
+qtde_leituras_zverde = 0
 qtde_consec_zverm = 0
+pressao_digitada = False
 
+print("========== REFINARIA DELTA 9 ==========")
+print("*** Bem vindo ao SEUC-4 ***")
 
 qtde_total_leituras = int(
-    input("Digite a quantidade total de leituras realizadas: "))
+    input("\nPara começar, digite a quantidade total de leituras realizadas: "))
 
-"""
-while qtde_consec_zverm < 2:
-    for i in range(1, qtde_total_leituras+1):
-        pressao = int(input("Digite a pressão: "))
-        pressao_ajustada = ajuste_termico(pressao)
-        zona_pressao = classificacao_estabilidade(pressao_ajustada)
+while qtde_consec_zverm < 2 and qtde_leituras < qtde_total_leituras:
 
-        if zona_pressao == 4:
-            qtde_consec_zverm += 1
+    pressao = int(input("Digite a pressão: "))
+
+    while pressao_digitada == False:
+        print(f"A pressão {pressao} UCPs digitada está correta?")
+        confirmacao = int(input("Digite 1 para SIM ou 2 para NÃO: "))
+        while confirmacao != 1 and confirmacao != 2:
+            confirmacao = input(
+                "Valor inválido! Digite 1 para SIM ou 2 para NÃO: ")
+        if confirmacao == 2:
+            pressao_digitada = False
+            pressao = int(input("Digite a pressão: "))
         else:
-            qtde_consec_zverm == 0
-        
-"""
+            pressao_digitada = True
 
-while qtde_consec_zverm != 2:
-    if qtde_leituras != qtde_total_leituras:
-        pressao = int(input("Digite a pressão: "))
-        pressao_ajustada = ajuste_termico(pressao)
-        zona_pressao = classificacao_estabilidade(pressao_ajustada)
+    pressao_ajustada = ajuste_termico(pressao)
+    nivel_estabilidade = classificacao_estabilidade(pressao_ajustada)
 
-        if zona_pressao == 4:
-            qtde_consec_zverm += 1
-        else:
-            qtde_leituras += 1
-            qtde_consec_zverm == 0
-            soma_leituras += pressao
-            if pressao < menor_pressao:
-                menor_pressao = pressao
-            if zona_pressao == 2:
-                qtde_leituras_zv += 1
+    qtde_leituras += 1
+    soma_pressao_ajustada += pressao_ajustada
 
-    print()
+    if pressao < menor_pressao:
+        menor_pressao = pressao
 
-print('Travou')
+    if nivel_estabilidade == 2:
+        qtde_leituras_zverde += 1
+
+    if nivel_estabilidade == 4:
+        qtde_consec_zverm += 1
+        if qtde_consec_zverm == 2:
+            perc_leituras = (qtde_leituras/qtde_total_leituras)*100
+            print(f"\nTravamento necessário. Duas leituras consecutivas na Zona Vermelha registradas"
+                  f"\nPercentual de leituras realizadas: {perc_leituras:.0f}%")
+    else:
+        qtde_consec_zverm = 0
+
+    pressao_digitada = False
+
+media = soma_pressao_ajustada / qtde_leituras
+perc_zverde = (qtde_leituras_zverde / qtde_leituras) * 100
+
+print("\n")
+print("\n========== INDICADORES DE REGISTRO ==========")
+print("\nMédia de pressão ajustada: ", media)
+print("Menor pressão registrada: ", menor_pressao)
+print("Percentual de leituras na Zona verde: ", perc_zverde)
+print("\n")
+
+
+# ajustar protecao na validacao da pressao (sim ou nao)
+# ajustar formatacoes de saída (centralizacao, cores, símbolos (%) por exemplo)
+# podemos usar bibliotecas de cor para destacar atencao para o usuaário???
+# registra qtde de leituras por turno e qtde de travamentos ocorridos -monitorar
