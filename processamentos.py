@@ -26,3 +26,9 @@ def classificacao_estabilidade(n):
         print("Zona vermelha - Crítica")
 
     return nivel_n
+
+def tendencias(atual,pressao_anterior,pressao_ante_anterior):
+    if atual > pressao_anterior > pressao_ante_anterior:   
+        print("ALERTA! PRESSÃO EM ASCENSÃO...")
+    elif atual < pressao_anterior < pressao_ante_anterior:
+        print("ALERTA! PRESSÃO EM DECRÉSCIMO...")
