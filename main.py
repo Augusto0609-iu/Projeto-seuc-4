@@ -61,7 +61,7 @@ while qtde_consec_zverm < 2 and qtde_leituras < qtde_total_leituras:
     tendencias(pressao_ajustada, pressao_anterior, pressao_ante_anterior)
 
     pressao_ante_anterior=pressao_anterior
-pressao_anterior=pressao_ajustada
+    pressao_anterior=pressao_ajustada
 
     qtde_leituras += 1
     soma_pressao_ajustada += pressao_ajustada
