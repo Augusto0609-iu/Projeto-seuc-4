@@ -1,4 +1,4 @@
-from processamentos import ajuste_termico, classificacao_estabilidade
+from processamentos import ajuste_termico, classificacao_estabilidade, tendencias
 
 qtde_leituras = 0
 soma_pressao_ajustada = 0
@@ -56,6 +56,12 @@ while qtde_consec_zverm < 2 and qtde_leituras < qtde_total_leituras:
 
     pressao_ajustada = ajuste_termico(pressao)
     nivel_estabilidade = classificacao_estabilidade(pressao_ajustada)
+
+    if qtde_leituras>=2:
+    tendencias(pressao_ajustada, pressao_anterior, pressao_ante_anterior)
+
+    pressao_ante_anterior=pressao_anterior
+pressao_anterior=pressao_ajustada
 
     qtde_leituras += 1
     soma_pressao_ajustada += pressao_ajustada
