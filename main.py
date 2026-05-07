@@ -1,4 +1,4 @@
-from processamentos import ajuste_termico, classificacao_estabilidade, validador_input
+from processamentos import ajuste_termico, classificacao_estabilidade
 
 qtde_leituras = 0
 soma_pressao_ajustada = 0
