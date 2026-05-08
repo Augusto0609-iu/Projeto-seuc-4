@@ -5,6 +5,8 @@ soma_pressao_ajustada = 0
 menor_pressao = 9999
 qtde_leituras_zverde = 0
 qtde_consec_zverm = 0
+pressao_anterior=0
+pressao_ante_anterior=0
 
 
 print("\n" + "="*45)
@@ -58,7 +60,7 @@ while qtde_consec_zverm < 2 and qtde_leituras < qtde_total_leituras:
     nivel_estabilidade = classificacao_estabilidade(pressao_ajustada)
 
     if qtde_leituras>=2:
-    tendencias(pressao_ajustada, pressao_anterior, pressao_ante_anterior)
+        tendencias(pressao_ajustada, pressao_anterior, pressao_ante_anterior)
 
     pressao_ante_anterior=pressao_anterior
     pressao_anterior=pressao_ajustada
